@@ -8,8 +8,9 @@ data class Orcamento(
     @GeneratedValue(strategy= GenerationType.AUTO)
     val id: Int,
     val descricao: String,
+    val cliente: String,
     @OneToMany
-    val vidros:List<Vidro>,
+    val projetos:List<Projeto>,
     @ManyToOne
     val autor: Autor
 )

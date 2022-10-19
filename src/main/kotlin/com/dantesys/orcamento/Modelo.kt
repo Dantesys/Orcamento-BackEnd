@@ -6,7 +6,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-data class Tipo(
+data class Modelo(
     val nome: String,
     val espessura: Int,
     val preco: Float,
