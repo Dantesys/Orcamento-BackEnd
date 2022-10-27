@@ -1,7 +1,13 @@
 # Orcamento-BackEnd
+**v1.1.0**
+
+MUDANÇAS
+- **/users**
+  - POST **/login** - Retorna um token e cria um cookie;
 
 **v1.0.0**
 
+NOVO
 - **/modelo**
     - GET **/all** - Retorna todos os modelos de vidros;
     - GET **/{id}** - Retorna um modelo especifico;

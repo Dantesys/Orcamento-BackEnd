@@ -22,7 +22,7 @@ class UserController(private val userService: UserService){
         user.setEncodePassword(data.password)
         return ResponseEntity.ok(userService.save(user))
     }
-    @GetMapping("/login")
+    @PostMapping("/login")
     fun login(@RequestBody data:LoginDTO,response: HttpServletResponse):ResponseEntity<Any>{
         val user = userService.getByEmail(data.email) ?: return ResponseEntity.badRequest().body(Mensagem("Usuario não encontrado"))
         if(!user.checkPW(data.password)){
@@ -37,7 +37,7 @@ class UserController(private val userService: UserService){
         val cookie = Cookie("jwt",jwt)
         cookie.isHttpOnly = true
         response.addCookie(cookie)
-        return ResponseEntity.ok(Mensagem("Sucesso"))
+        return ResponseEntity.ok(jwt)
     }
     @GetMapping("/logout")
     fun logout(response: HttpServletResponse):ResponseEntity<Any>{
@@ -47,8 +47,8 @@ class UserController(private val userService: UserService){
         response.addCookie(cookie)
         return ResponseEntity.ok(Mensagem("Sucesso"))
     }
-    @GetMapping("/me")
-    fun user(@CookieValue("jwt") jwt:String?):ResponseEntity<Any>{
+    @PostMapping("/me")
+    fun user(@RequestBody jwt:String?):ResponseEntity<Any>{
         try {
             if(jwt==null){
                 return ResponseEntity.status(401).body(Mensagem("Não Autorizado"))
